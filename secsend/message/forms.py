@@ -10,3 +10,6 @@ class MessageForm(forms.ModelForm):
         fields = (
             'message',
         )
+        labels = {
+            'message': ''
+        }
