@@ -1,0 +1,13 @@
+<!-- index.html -->
+{% extends "base.html" %}
+{% block content %}
+<form action="{% url 'message:save_message' %}" method="post">
+    <label> Write your message, please:</label>
+    <table>
+        {% csrf_token %}
+        {{ form }}
+    </table>
+    <input type="submit" value="Send">
+</form>
+
+{% endblock %}
