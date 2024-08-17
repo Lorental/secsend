@@ -12,7 +12,11 @@ class BaseModel(models.Model):
 
 class Message(BaseModel):
     identificator = models.TextField('Identificator', null=False, blank=False)
-    message = models.TextField('Message', null=True, blank=False)
+    message = models.TextField(null=True, blank=False)
+    source_ip = models.TextField('Source IP',
+                                 null=False,
+                                 blank=False,
+                                 default='Unknown')
 
     def __str__(self) -> str:
         return self.identificator

@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html lang="ru">
     <head>
-        SecSend - Send your private messages by secure way
+        {% include "includes/header.html" %}
     </head>
+    <br>
+    <br>
     <body>
+        <br>
         <main>
-            <!-- Using for content blocks -->
-            {% block content %} Error( {% endblock %}
+            <div>
+                {% load django_bootstrap5 %}
+                {% bootstrap_css %}
+                <!-- Using for content blocks -->
+                {% block content %} Error( {% endblock %}
+            </div>
         </main>
         <footer>
-            Powered by Lorental https://github.com/Lorental
+            {% include "includes/footer.html" %}
         </footer>
     </body>
 </html>

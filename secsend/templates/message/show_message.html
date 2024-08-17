@@ -1,6 +1,15 @@
 <!-- show_message.html -->
 {% extends "base.html" %}
 {% block content %}
-    <h1>Message for you</h1>
-    <p> {{ message.message }}
+<form>
+    <label> Message for you: </label>
+    <br>
+    <br>
+    <p>
+        {{ message.message }}
+    </p>
+    <br>
+    <br>
+</form>
+<a type="button" class="btn btn-primary btn-sm btn-round" href="{% url 'message:show_index' %}" name="Send another message">Send another message</a>
 {% endblock %}

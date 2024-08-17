@@ -21,9 +21,15 @@ def save_message(request):
         message = messageform.save(commit=False)
         hashline = str.encode('current' + str(random.randint(0, 4096)) +
                               datetime.now().strftime('%Y-%m-%d %H:%M:%S.%fZ'))
-        # доделать хэширование
         message.identificator = hashlib.sha256(hashline).hexdigest()
+        message.source_ip = str(request.META['REMOTE_ADDR'])
         message.save()
+        if request.is_secure():
+            prefix = 'https://'
+        else:
+            prefix = 'http://'
+        message.identificator = (prefix + request.get_host() + "/message/" +
+                                 message.identificator)
     context = {'identificator': message.identificator}
     template_name = 'message/link_page.html'
     return render(request, template_name, context)

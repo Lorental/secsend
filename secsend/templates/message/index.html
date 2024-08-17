@@ -1,19 +1,20 @@
 <!-- index.html -->
 {% extends "base.html" %}
+{% load django_bootstrap5 %}
 {% block content %}
-{% csrf_token %}
 <form action="{% url 'message:save_message' %}" method="post">
+    {% csrf_token %}
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-mg-12">
                 <h1 align='center'>One-Time Message</h1>
-            <div class="form_send">
-                    {{ form }}
-            </div>
-                <br>
-            <div class="button_style_second">
-                <input type="submit" value="Send">
+            <div class="col-mg-9">
+                    {% bootstrap_form form %}
+            </div class="col text-center">
+                <br>    
+                {% bootstrap_button button_type="submit" content="Send" class="btn btn-default"%}
             </div>
         </div>
     </div>
+</form>
 
 {% endblock %}

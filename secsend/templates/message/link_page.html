@@ -1,9 +1,15 @@
 <!-- index.html -->
 {% extends "base.html" %}
+{% load django_bootstrap5 %}
 {% block content %}
 <form>
     <label> Your link is here: </label>
+    <br>
+    <br>
     {{ identificator }}
+    <br>
+    <br>
 </form>
+<a type="button" class="btn btn-primary btn-sm btn-round" href="{% url 'message:show_index' %}" name="Send another message">Send another message</a>
 
 {% endblock %}
