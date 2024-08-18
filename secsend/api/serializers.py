@@ -15,5 +15,5 @@ class LinkSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
         fields = (
-            'identificator',
+            'link',
         )

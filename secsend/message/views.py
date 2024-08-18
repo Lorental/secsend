@@ -29,14 +29,14 @@ def save_message(request):
                                   datetime.now().strftime('%Y-%m-%d %H:%M:%S.%fZ'))
             message.identificator = hashlib.sha256(hashline).hexdigest()
             message.source_ip = str(request.META['REMOTE_ADDR'])
-            message.save()
             if request.is_secure():
                 prefix = 'https://'
             else:
                 prefix = 'http://'
-            message.identificator = (prefix + request.get_host() +
-                                     "/message/" + message.identificator)
-        context = {'identificator': message.identificator}
+            message.link = (prefix + request.get_host() +
+                            "/message/" + message.identificator)
+            message.save()
+        context = {'link': message.link}
         template_name = 'message/link_page.html'
         return render(request, template_name, context)
     except Exception as error:

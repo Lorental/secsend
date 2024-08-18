@@ -17,6 +17,7 @@ class Message(BaseModel):
                                  null=False,
                                  blank=False,
                                  default='Unknown')
+    link = models.TextField(null=True, blank=False, default='old')
 
     def __str__(self) -> str:
         return self.identificator

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'message.apps.MessageConfig',
     'django_bootstrap5',
     'rest_framework',
+    'rest_framework_swagger',
     'api.apps.ApiConfig',
 ]
 

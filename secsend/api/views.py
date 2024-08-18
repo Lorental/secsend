@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from datetime import datetime
 
-from message.models import Log
+from message.models import Log, Message
 from .serializers import MessageSerializer, LinkSerializer
 # Create your views here.
 
@@ -19,16 +19,22 @@ def save_message(request):
                 hashline = str.encode('current' +
                                       str(random.randint(0, 4096)) +
                                       datetime.now().strftime('%Y-%m-%d %H:%M:%S.%fZ'))
-                message.identificator = hashlib.sha256(hashline).hexdigest()
-                message.source_ip = str(request.META['REMOTE_ADDR'])
-                message.save()
+                identificator = hashlib.sha256(hashline).hexdigest()
+                source_ip = str(request.META['REMOTE_ADDR'])
+                log = Log()
+                log.text = request.__str__()
+                log.save()
+                message.save(identificator=identificator, source_ip=source_ip)
                 if request.is_secure():
                     prefix = 'https://'
                 else:
                     prefix = 'http://'
-                message.identificator = (prefix + request.get_host() +
-                                         "/message/" + message.identificator)
-                respmessage = LinkSerializer(message)
+                link = (prefix + request.get_host() +
+                        "/message/" + identificator)
+                message.save(identificator=identificator, source_ip=source_ip,
+                             link=link)
+                resplink = message.save()
+                respmessage = LinkSerializer(resplink)
                 return Response(respmessage.data)
     except Exception as error:
         log = Log()
