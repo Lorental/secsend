@@ -34,8 +34,8 @@ def save_message(request):
                 prefix = 'https://'
             else:
                 prefix = 'http://'
-            message.identificator = (prefix + request.get_host() + "/message/" +
-                                     message.identificator)
+            message.identificator = (prefix + request.get_host() +
+                                     "/message/" + message.identificator)
         context = {'identificator': message.identificator}
         template_name = 'message/link_page.html'
         return render(request, template_name, context)
