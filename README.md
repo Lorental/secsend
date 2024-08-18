@@ -14,3 +14,6 @@ Python / Django / BootStrap
 ### Restrictions
 You should disable preview in your corp. messenger and on your email server (or this things will destroy messages, because MS Exchange / Slack / Tg / other usually get first request to create preview)
 You can also ban this things by user-agent in product code, if preview disabling is not your way.
+
+### Access to server
+By default, I set Allowed Hosts by *, because you can set it for your production environment by yourself.
